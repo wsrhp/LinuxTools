@@ -1,0 +1,30 @@
+How to install hd2u
+-------------------
+
+First, you need some UNIX system which have some basic C development tools
+and popt library alredy installed.
+
+Note: If you're using some package management tool on your system you should
+have also installed so called 'development' package of popt library
+(popt-dev or popt-devel, etc.) so required header files are also installed.
+
+
+After you sucessfuly downloaded and unpacked source tarball, do the
+following in source directory:
+
+$ ./configure
+$ make
+$ make install
+
+This will build and install 'dos2unix' into default location,
+which is /usr/local/bin .
+
+If you want to use another prefix than /usr/local use for example:
+
+$ ./configure --prefix=/usr
+
+This will install 'dos2unix' into /usr/bin .
+
+For more information use:
+
+$ ./configure --help

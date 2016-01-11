@@ -1,0 +1,32 @@
+# configure.in for hd2u
+# Copyright 2000,.. by Peter Hanecak <hanecak@megaloman.sk>
+
+AC_PREREQ(2.57)
+AC_INIT(hd2u, 1.0.0, hanecak+hd2u@megaloman.sk)
+AC_CONFIG_SRCDIR([dos2unix.c])
+AC_CONFIG_HEADER([config.h])
+
+AC_MSG_RESULT([Configuring ${PACKAGE_NAME} ${PACKAGE_VERSION}])
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+
+# Checks for libraries.
+AC_CHECK_LIB(popt, getopt_long,
+  [LIBS="-lpopt $LIBS"],
+  AC_MSG_ERROR(*** libpopt not found))
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([stdlib.h string.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_MODE_T
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_STAT
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT

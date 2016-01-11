@@ -1,0 +1,178 @@
+hd2u 1.0.0 - stable release (2005/03/15)
+
+Copyright 1999,.. by Peter Hanecak <hanecak@megaloman.sk>.
+All rights reserved.
+
+
+Description
+-----------
+
+hd2u is Hany's DOS <-> Unix convertor.
+
+dos2unix is filter used to convert plain texts from DOS format (CR/LF) to UNIX
+format (LF) and vice versa. Aditionaly it can also handle files in Macintosh
+format (CR) and convert them into other formats.
+
+
+Copying
+-------
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+See the COPYING file for license information.
+
+
+Requirements
+------------
+
+popt:	is required to process command line arguments.
+
+	For more information about popt see
+	<http://freshmeat.net/projects/popt/>.
+	Sources can be downloaded from
+	<ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.0.x/>.
+	RPM package of popt can be found for example at
+	<http://rpmfind.net/linux/RPM/popt.html>.
+
+
+Download
+--------
+
+You can find sources at:
+
+	http://www.megaloman.com/~hany/_data/hd2u/
+	http://terminus.sk/~hany/_data/hd2u/
+
+Also you can download RPM packages from:
+
+	http://www.megaloman.com/~hany/RPM/hd2u.html
+
+
+To verify files, use my public key:
+<http://www.megaloman.com/~hany/gnupg-hany-public-key.txt>.
+
+
+Instalation
+-----------
+
+To install this package under a Unix derivative, read the INSTALL file.
+
+
+Usage
+-----
+
+	dos2unix [--verbose|-v] [--test|-t] [--force|-f] \
+		 [--<x>2<y>|--auto|-<Z>] \
+		 [<file name> [...]]
+
+	--auto, -A	output will be set based upon autodetection
+			of source format
+	--d2u, -U	perform DOS -> UNIX conversion
+	--m2u, -T	perform MAC -> UNIX conversion
+	--u2d, -D	perform UNIX -> DOS conversion
+	--u2m, -M	perform UNIX -> MAC conversion
+	--d2m, -O	perform DOS -> MAC conversion
+	--m2d, -C	perform MAC -> DOS conversion
+
+	--force		suppress internal conversion type corrections
+			based on autodetected input format
+	--skipbin, -b	skip binary files
+	--test, -t	don't write any conversion results; usefull with
+			--verbose to just report on source type
+	--verbose, -v	print extra information on stderr
+	--version, -V	print version information on stderr
+
+When no options are given then input format will be automatically detected
+and converted as follows:
+
+	DOS -> UNIX
+	MAC -> UNIX
+	UNIX -> DOS
+
+Same as above applies if --auto option is used.
+
+When no file is given, then stdin is used as input and stdout as output.
+
+When concrete conversion type is used (--d2u or --u2d option) and file
+format is autodetected as target format, file is skipped - not touched - so
+there is no modification time change.
+
+Binary files will be skipped automatically if option --skipbin (or -b) is
+used.
+
+Stray '\r' characters (without a following '\n') are reported but only
+conversion 'DOS -> Unix' affects them (they are skipped).
+
+You can display usage information using 'dos2unix -h' or 'dos2unix --help'.
+
+Examples:
+
+- this converts README.txt into DOS format; if README.txt is in UNIX format,
+it is converted otherwise it will be unchanged:
+
+	dos2unix --u2d README.txt
+
+- this is obvious:
+
+	cat source_in_UNIX_format.txt | dos2unix > result_in_DOS_format.txt
+
+- this will just "copy" source.txt to unchanged_source.txt:
+
+	cat source.txt | dos2unix | dos2unix > unchanged_source.txt
+
+- this will convert all .txt files in current directory into UNIX format,
+all documents in UNIX format and all binary files are skipped, verbose
+information will be displayed:
+
+	dos2unix -Ubv *.txt
+
+
+
+Maintainer
+----------
+
+I (the author) consider myself maintainer :) .
+
+If you want to contact me, then send an e-mail to:
+
+	hanecak@megaloman.sk
+
+
+How to contribute
+-----------------
+
+If you would like to submit a patch, send it to me <hanecak@megaloman.sk>.
+Please be sure to include a textual explanation of what your patch does.
+
+The preferred format for changes is "diff -u" output. You might
+generate it like this:
+
+$ cd hd2u-work
+$ [your changes]
+$ make mrproper
+$ cd ..
+$ diff -urN hd2u-orig hd2u-work > mydiffs.patch
+
+
+Distribution
+------------
+
+The primary site for release of this software is:
+
+	http://www.megaloman.com/~hany/software/hd2u/
+
+Mirror is located at:
+
+	http://terminus.sk/~hany/software/hd2u/

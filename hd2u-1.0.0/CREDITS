@@ -1,0 +1,11 @@
+Thanks to contributors:
+
+Rob Ginda <rginda@netscape.com>
+- rewrite of version 0.6.0 and new features (--test, --verbose, skip binary)
+
+Dan Kuykendall <dan@kuykendall.org>
+- suggestion to not to touch files which are alredy in specified target
+  format
+
+Philip White <pwhite@gigacluster.net>
+- minor grammar corrections and miscellaneous beautifying in help & docs 

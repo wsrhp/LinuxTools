@@ -1,0 +1,143 @@
+hd2u 1.0.0
+----------
+
+This stable release contains no functional changes since last development
+release (0.9.2). Only few typos in documentation has been fixed.
+
+Most notable changes since last stable release (0.8.2) are:
+
+	* support for Macintosh text format
+	* new --version (-V) option
+	* documentation enhancements and fixes
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.9.2
+----------
+
+In this release issues with some binary files being recognized as text files
+in Macintosh format should be resolved. Also documentation has been enhanced
+and some typos in it fixed.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.9.1
+----------
+
+New --version (-V) option has been added to display version information and
+build process has been enhanced.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.9.0
+----------
+
+This release starts development period. Most notable change is addition of
+support for Macintosh text format.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.8.2
+----------
+
+This release introduces read/write buffers which increases conversion
+performance about 9 times.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.8.1
+----------
+
+Temporary files are now created in directory defined by TMPDIR or TMP
+environment variable. If no such variable is found, '/tmp' directory is
+used. Also security has been enhanced by usage of 'mkstemp()' instead of
+'tmpnam()'.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.8.0
+----------
+
+This stable release consists of documentation updates and fixes.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.7.2
+----------
+
+Compilation issues with gcc 2.96 were resolved and documentation has been
+fixed.
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.7.1
+----------
+
+In this release, there are following changes:
+
+1) convert() is reworked so it always "caches" input into tempfile (even
+when no conversion is done *). This makes dos2unix able to convert data from
+stdin again. Also scan/detect code has been separated from logic (conversion
+type selection) and verbose output. Also every conversion type (dos -> unix,
+unix -> dos, copy) has now its own optimised loop.
+
+2) From above changes comes some performance issues (I do not know if anyone
+cares about them, but still I'm going to write about it):
+	- conversion of big files should be faster (optimised loops for each
+	conversion)
+	- conversion of a lot of files should be slower (while there is full
+	input scan and more logic)
+	- even when just testing (--test and --verbose, --test alone makes
+	just file reads without any output) temporary file is used to store
+	input - this is because I did not wanted to slow scan with condition 
+	'if (!testmode)' on each 'fputc()' thus slowing conversion; I think
+	test will be used much less then conversions
+
+3) As opposed to version 0.7.0, binary files are skipped only when --skipbin
+or -b option is used. I'm from Slovakia and our charset uses codes above
+126 thus all our conversion which uses dos2unix 0.7.0 wont work on such
+files. So to maintain some backward compatibility from now binary files will
+be detected but not skipped by default.
+
+By the way, if you are using 'dos2unix *' you should be VERY CAREFULL!!! It's
+something like 'rm -rf .' if missused. So 'dos2unix *.txt *.c *.h doc/*.html'
+would be far better (even if not that comfortable).
+
+4) Rouge '\r' characters (DOS format line breaks with missing '\n' after
+them) are now reported but affected only by 'dos -> unix' conversion - they
+are skipped.
+
+5) If you give directory as input file to 'dos2unix' it will be skipped (I
+have better no idea what it was doing untill now).
+
+
+Peter Hanecak <hanecak@megaloman.sk>
+
+
+hd2u 0.7.0
+----------
+
+This is development release based on changes from Rob Ginda
+<rginda@netscape.com> which breaks conversion functionality when converting
+data from stdin. So users which requires proper functionality of stdin
+conversion should continue to use version 0.6.0 (or earlier) and wait for
+fixed version to be released (or make a fix for themselves - in such case I
+would be happy to receive that fix :).
+
+Peter Hanecak <hanecak@megaloman.sk>
